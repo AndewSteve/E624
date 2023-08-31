@@ -2,11 +2,24 @@
 
 {% block content %}
     <h1>Hello</h1>
-    <p>{{teacherStr}}</p>
+    <p></p>
     <div>
         <div>
-            {% load static %}
-            <img src="{% static 'image/周博.jpg' %}" width="200px" height="250px" alt="">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    {% load static %}
+                    <img src="{% static 'image/周博.jpg' %}" width="180px" height="250px" alt="">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">  {{teacher1.name}}</h5>
+                      <p class="card-text">  {{teacher1.identity}}</p>
+                      <p class="card-text"><small class="text-muted">  {{teacher1.department}}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
 {% endblock %}

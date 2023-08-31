@@ -10,7 +10,5 @@ def home(request):
     teacher1 = Teacher(name = 'momoi',
                        identity = "教授",
                        department = "数字媒体系")
-    teacherStr = teacher1.__str__
-    print(teacherStr)
-    return render(request,'home.html',{"teacherStr":teacherStr})
+    return render(request,'home.html',{"teacher1":teacher1})
 
