@@ -28,5 +28,9 @@ def result(request):
     teachers = [teacher1,teacher2,teacher3,teacher4]
     return render(request,'result.html',{"teachers":teachers})
 
+def allResults(request):
+    teachers = Teacher.objects.all()
+    return render(request,'result.html',{"teachers":teachers})
+
 
 
