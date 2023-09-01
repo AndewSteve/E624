@@ -1,25 +1,129 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block home %}
+    <style>
+      .szdw-bar {
+          background-image: url('{% static "image/szdw.png" %}');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          text-align: center;
+          padding: 60px 0;
+      }
 
-{% block content %}
-    <h1>Hello</h1>
-    <p></p>
-    <div>
-        <div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                  <div class="col-md-4">
-                    {% load static %}
-                    <img src="{% static 'image/周博.jpg' %}" width="180px" height="250px" alt="">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">  {{teacher1.name}}</h5>
-                      <p class="card-text">  {{teacher1.identity}}</p>
-                      <p class="card-text"><small class="text-muted">  {{teacher1.department}}</small></p>
-                    </div>
-                  </div>
+      .szdw-bar h1 {
+          font-size: 36px;
+          color: #fff;
+      }
+
+      .szdw-bar h2 {
+          font-size: 20px;
+          color: #c0c5cb;
+      }
+
+
+      .search-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 30px;
+      }
+  
+      .search-box {
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 10px;
+          display: flex;
+          justify-content: space-between;
+          width: 700px;
+      }
+  
+      .search-input {
+          border: none;
+          outline: none;
+          flex: 1;
+          padding: 8px;
+          font-size: 16px;
+      }
+  
+      .search-button {
+          background-color: #4285f4;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          padding: 8px 16px;
+          cursor: pointer;
+      }
+  
+      .search-button:hover {
+          background-color: #357ae8;
+      }
+  
+      .card-img-enlarge{
+          max-width: 100%;
+          height: auto;
+          transition: transform 0.2s;
+        }
+      
+        .card-img-enlarge:hover{
+          transform: scale(1.1);
+        }
+
+      
+    </style>
+
+
+ <div class="szdw-bar">
+  <h1>师资队伍</h1>
+  <h2>Teachers</h2>
+ </div>
+
+  <div class="search-container">
+      <div class="search-box">
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Search by:
+          </button>
+          <div class="dropdown-menu" aria-labelledby="searchDropdown">
+              <a class="dropdown-item" href="#" data-toggle="dropdown">Name</a>
+              <a class="dropdown-item" href="#" data-toggle="dropdown" data-target="#filterModal">Add Filters</a>
+          </div>
+        </div>
+
+        <input type="text" class="search-input" placeholder="Search...">
+        <button class="search-button">Search</button>
+      </div>
+  </div>
+
+  <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Select filter options:</p>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="filterOption1">
+                    <label class="form-check-label" for="filterOption1">Filter 1</label>
                 </div>
-              </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="filterOption2">
+                    <label class="form-check-label" for="filterOption2">Filter 2</label>
+                </div>
+                <!-- Add more filter options here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Apply Filters</button>
+            </div>
         </div>
     </div>
+</div>
+
+
 {% endblock %}

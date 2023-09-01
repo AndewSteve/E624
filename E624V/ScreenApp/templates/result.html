@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    .card-img-enlarge{
+        max-width: 100%;
+        height: auto;
+        transition: transform 0.2s;
+      }
+    
+      .card-img-enlarge:hover{
+        transform: scale(1.1);
+      }
+  </style>
+
+  <div class="container">
+    <div class="row">
+      {% for teacher in teachers %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="row no-gutters">
+          <div class="col-md-6">
+            <img src="{% static 'image/'|add:teacher.name|add:'.jpg' %}" class="card-img card-img-enlarge" alt="{teacher.name}">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-title">{{teacher.name}}</h5>
+              <p class="card-text">{{teacher.identity}}<br>{{teacher.department}}</p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
