@@ -2,34 +2,13 @@
 {% load static %}
 {% block home %}
     <style>
-      .szdw-bar {
-          background-image: url('{% static "image/szdw.png" %}');
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center;
-          text-align: center;
-          padding: 60px 0;
-      }
-
-      .szdw-bar h1 {
-          font-size: 36px;
-          color: #fff;
-      }
-
-      .szdw-bar h2 {
-          font-size: 20px;
-          color: #c0c5cb;
-      }
-
-
-      .search-container {
+      .search-container ,.filter-container{
           display: flex;
           justify-content: center;
           align-items: center;
           margin-top: 30px;
       }
-  
-      .search-box {
+      .search-box ,.filter-box{
           border: 1px solid #ccc;
           border-radius: 8px;
           padding: 10px;
@@ -37,7 +16,9 @@
           justify-content: space-between;
           width: 700px;
       }
-  
+      .filter-select {
+        width: 160px;
+      }
       .search-input {
           border: none;
           outline: none;
@@ -45,7 +26,6 @@
           padding: 8px;
           font-size: 16px;
       }
-  
       .search-button {
           background-color: #4285f4;
           color: #fff;
@@ -54,76 +34,104 @@
           padding: 8px 16px;
           cursor: pointer;
       }
-  
       .search-button:hover {
           background-color: #357ae8;
       }
-  
-      .card-img-enlarge{
-          max-width: 100%;
-          height: auto;
-          transition: transform 0.2s;
-        }
-      
-        .card-img-enlarge:hover{
-          transform: scale(1.1);
-        }
-
-      
     </style>
 
 
- <div class="szdw-bar">
-  <h1>师资队伍</h1>
-  <h2>Teachers</h2>
- </div>
-
   <div class="search-container">
-      <div class="search-box">
-
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Search by:
-          </button>
-          <div class="dropdown-menu" aria-labelledby="searchDropdown">
-              <a class="dropdown-item" href="#" data-toggle="dropdown">Name</a>
-              <a class="dropdown-item" href="#" data-toggle="dropdown" data-target="#filterModal">Add Filters</a>
-          </div>
-        </div>
-
-        <input type="text" class="search-input" placeholder="Search...">
-        <button class="search-button">Search</button>
-      </div>
-  </div>
-
-  <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Select filter options:</p>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="filterOption1">
-                    <label class="form-check-label" for="filterOption1">Filter 1</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="filterOption2">
-                    <label class="form-check-label" for="filterOption2">Filter 2</label>
-                </div>
-                <!-- Add more filter options here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Apply Filters</button>
-            </div>
-        </div>
+    <div class="search-box">
+        <select class="form-control filter-select" title="Choose Search option">
+            <option value="name">按名字搜索</option>
+            <option value="filter">筛选搜索信息</option>
+        </select>
+        <input type="text" class="search-input" placeholder="搜索教师...">
+        <button class="search-button">搜索</button>
     </div>
 </div>
+
+<!-- Filter Container (默认隐藏) -->
+<div class="filter-container" style="display: none;">
+      <div class="filter-box">
+        <ul class="list-group list-group-flush flex-fill">
+          <li class="list-group-item">
+            <div class="row">
+              <label class="col font-weight-bold text-dark">身份</label><br>
+            </div>
+            <div class="row ml-2">
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="identityOption1" value="identity1">
+                  <label class="form-check-label" for="identityOptionOption1">教授</label>
+              </div>
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="identityOption2" value="identity2">
+                  <label class="form-check-label" for="identityOptionOption2">副教授</label>
+              </div>
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="identityOption3" value="identity3">
+                  <label class="form-check-label" for="identityOptionOption3">讲师</label>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <label class="col font-weight-bold text-dark">部门</label><br>
+            </div>
+            <div class="row ml-2">
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="departmentOption1" value="department1">
+                  <label class="form-check-label" for="departmentOption1">设计系</label>
+              </div>
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="departmentOption2" value="department2">
+                  <label class="form-check-label" for="departmentOption2">数字媒体系</label>
+              </div>
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="departmentOption3" value="department3">
+                  <label class="form-check-label" for="departmentOption3">传播学系</label>
+              </div>
+            </div>
+            <div class="row ml-2">
+              <div class="form-check col">
+                  <input type="checkbox" class="form-check-input" id="departmentOption4" value="department4">
+                  <label class="form-check-label" for="departmentOption4">艺术教研中心</label>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+</div>
+
+{% block result %}
+{% endblock %}
+
+
+<!-- 用来加载组件 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-Lge2E2XotzMiwH69/MXB72yLpwyENMiOKX8zS8Qo7LDCvaBIWGL+GlRQEKIpYR04" crossorigin="anonymous"></script>
+
+<script>
+    $('.filter-select').change(function() {
+        if ($(this).val() === 'filter') {
+            // 当选择筛选条件时，显示筛选选项
+            $('.filter-container').show();
+        } else {
+            // 否则隐藏筛选选项
+            $('.filter-container').hide();
+        }
+    });
+    //加载Option组件
+    $(document).ready(function() {
+        if ($('.filter-select').val() === 'filter') {
+            $('.filter-options').show();
+        } else {
+            $('.filter-options').hide();
+        }
+    });
+</script>
+
 
 
 {% endblock %}

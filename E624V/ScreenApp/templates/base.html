@@ -25,6 +25,22 @@
       .link-text {
         font-size: 20px;
       }
+      .szdw-bar {
+          background-image: url('{% static "image/szdw.png" %}');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          text-align: center;
+          padding: 60px 0;
+      }
+      .szdw-bar h1 {
+          font-size: 36px;
+          color: #fff;
+      }
+      .szdw-bar h2 {
+          font-size: 20px;
+          color: #c0c5cb;
+      }
     </style>
     
     <div class="red-rectangle"></div>
@@ -48,6 +64,12 @@
 
 
 
+    <div class="szdw-bar">
+      <h1>师资队伍</h1>
+      <h2>Teachers</h2>
+     </div>
+
+
     <div class="search">
       {% block home %}
       {% endblock %}
@@ -58,11 +80,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-Lge2E2XotzMiwH69/MXB72yLpwyENMiOKX8zS8Qo7LDCvaBIWGL+GlRQEKIpYR04" crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(function() {
-          $('.dropdown-toggle').dropdown();
-      });
-    </script>
   
   
   </body>
