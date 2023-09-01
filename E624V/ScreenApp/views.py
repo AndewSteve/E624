@@ -7,6 +7,12 @@ from django.http import HttpResponse
 from ScreenApp.models import Teacher,Identity,Department
 
 def home(request):
+    return render(request,'home.html',{})
+
+def search(request):
+    return render(request,'search.html',{})
+
+def result(request):
     teacher1 = Teacher(name = '周博',
                        identity = "讲师",
                        department = "数字媒体系")
@@ -20,10 +26,7 @@ def home(request):
                     identity = "教授",
                     department = "艺术教研中心")
     teachers = [teacher1,teacher2,teacher3,teacher4]
-    return render(request,'home.html',{"teachers":teachers})
-
-def search(request):
-        return render(request,'search.html',{})
+    return render(request,'result.html',{"teachers":teachers})
 
 
 

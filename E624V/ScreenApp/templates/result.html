@@ -2,36 +2,60 @@
 {% load static %}
 {% block result %}
   <style>
+    .result-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .result-box{
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 1000px;
+    }
     .card-img-enlarge{
-        max-width: 100%;
-        height: auto;
-        transition: transform 0.2s;
-      }
-    
-      .card-img-enlarge:hover{
-        transform: scale(1.1);
-      }
+      max-width: 100%;
+      height: auto;
+      transition: transform 0.2s;
+    }
+    .card-img-enlarge:hover{
+      transform: scale(1.1);
+    }
   </style>
 
-  <div class="container">
-    <div class="row">
-      {% for teacher in teachers %}
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="row no-gutters">
-          <div class="col-md-6">
-            <img src="{% static 'image/'|add:teacher.name|add:'.jpg' %}" class="card-img card-img-enlarge" alt="{teacher.name}">
-          </div>
-          <div class="col-md-6">
-            <div class="card-body">
-              <h5 class="card-title">{{teacher.name}}</h5>
-              <p class="card-text">{{teacher.identity}}<br>{{teacher.department}}</p>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+  <div class="result-container">
+    <div class="result-box">
+        <ul class="list-group list-group-flush flex-fill">
+            <li class="list-group-item">
+                <div class="row">
+                    <label class="col font-weight-bold text-dark" style="font-size: 36px;">搜索结果</label><br>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                  {% for teacher in teachers %}
+                  <div class="col-md-4 mb-4">
+                    <div class="card">
+                      <div class="row no-gutters">
+                      <div class="col-md-6">
+                        <img src="{% static 'image/'|add:teacher.name|add:'.jpg' %}" class="card-img card-img-enlarge" alt="{teacher.name}">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title">{{teacher.name}}</h5>
+                          <p class="card-text">{{teacher.identity}}<br>{{teacher.department}}</p>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+            </li>
+        </ul>
     </div>
   </div>
 {% endblock %}
