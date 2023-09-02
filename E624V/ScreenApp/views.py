@@ -25,10 +25,7 @@ def result(request):
             teachers = teachers.filter(identity__in = teacher_identity_filter)
         if teacher_department_filter:
             teachers = teachers.filter(department__in = teacher_department_filter)
-        
-        print(teacher_name)
-        print(teacher_identity_filter)
-        print(teacher_department_filter)
+
         return render(request,'result.html',{"teachers":teachers,
                                              "identities":identities,
                                              "departments":departments})
