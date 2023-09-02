@@ -39,69 +39,57 @@
       }
     </style>
 
-
+<form method="POST" action="{% url 'result' %}" >
+  {% csrf_token %}
   <div class="search-container">
     <div class="search-box">
-        <select class="form-control filter-select" title="Choose Search option">
+        <select class="form-control filter-select" title="选择搜索模式">
             <option value="name">按名字搜索</option>
-            <option value="filter">筛选搜索信息</option>
+            <option value="filter">添加筛选筛选</option>
         </select>
-        <input type="text" class="search-input" placeholder="搜索教师...">
-        <button class="search-button">搜索</button>
+        <input type="text" class="search-input" name="teacher_name" placeholder="搜索教师...">
+        <button class="search-button" type="submit">搜索</button>
     </div>
-</div>
+  </div>
 
-<!-- Filter Container (默认隐藏) -->
-<div class="filter-container" style="display: none;">
-      <div class="filter-box">
-        <ul class="list-group list-group-flush flex-fill">
-          <li class="list-group-item">
-            <div class="row">
-              <label class="col font-weight-bold text-dark">身份</label><br>
-            </div>
-            <div class="row ml-2">
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="identityOption1" value="identity1">
-                  <label class="form-check-label" for="identityOptionOption1">教授</label>
+  <!-- Filter Container (默认隐藏) -->
+  <div class="filter-container" style="display: none;">
+        <div class="filter-box">
+          <ul class="list-group list-group-flush flex-fill">
+            <li class="list-group-item">
+              <div class="row">
+                <label class="col font-weight-bold text-dark  mb-4">身份</label><br>
               </div>
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="identityOption2" value="identity2">
-                  <label class="form-check-label" for="identityOptionOption2">副教授</label>
+              <div class="row">
+                {% for choice in identities.choices %}
+                <div class="col-md-4 mb-4">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="identityOption{{ forloop.counter }}" name="identity"  value="{{ choice.0 }}">
+                    <label class="form-check-label" for="identityOption{{ forloop.counter }}">{{ choice.1 }}</label>
+                  </div>
+                </div>
+                {% endfor %}
               </div>
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="identityOption3" value="identity3">
-                  <label class="form-check-label" for="identityOptionOption3">讲师</label>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <label class="col font-weight-bold text-dark  mb-4">部门</label><br>
               </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <label class="col font-weight-bold text-dark">部门</label><br>
-            </div>
-            <div class="row ml-2">
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="departmentOption1" value="department1">
-                  <label class="form-check-label" for="departmentOption1">设计系</label>
+              <div class="row">
+                {% for choice in departments.choices %}
+                <div class="col-md-4 mb-4">
+                  <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="departmentOption{{ forloop.counter }}" name="department" value="{{ choice.0 }}">
+                      <label class="form-check-label" for="departmentOption{{ forloop.counter }}">{{ choice.1 }}</label>
+                  </div>
+                </div>
+                {% endfor %}
               </div>
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="departmentOption2" value="department2">
-                  <label class="form-check-label" for="departmentOption2">数字媒体系</label>
-              </div>
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="departmentOption3" value="department3">
-                  <label class="form-check-label" for="departmentOption3">传播学系</label>
-              </div>
-            </div>
-            <div class="row ml-2">
-              <div class="form-check col">
-                  <input type="checkbox" class="form-check-input" id="departmentOption4" value="department4">
-                  <label class="form-check-label" for="departmentOption4">艺术教研中心</label>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-</div>
+            </li>
+          </ul>
+        </div>
+  </div>
+</form>
 
 {% block result %}
 {% endblock %}

@@ -6,31 +6,44 @@ from django.http import HttpResponse
 
 from ScreenApp.models import Teacher,Identity,Department
 
+identities = Identity
+departments = Department
 def home(request):
-    return render(request,'home.html',{})
-
-def search(request):
-    return render(request,'search.html',{})
+    return render(request,'home.html',{"identities":identities,
+                                       "departments":departments})
 
 def result(request):
-    teacher1 = Teacher(name = '周博',
-                       identity = "讲师",
-                       department = "数字媒体系")
-    teacher2 = Teacher(name = '符强',
-                    identity = "副教授",
-                    department = "数字媒体系")
-    teacher3 = Teacher(name = '谭剑',
-                    identity = "副教授",
-                    department = "设计系")
-    teacher4 = Teacher(name = '李霞',
-                    identity = "教授",
-                    department = "艺术教研中心")
-    teachers = [teacher1,teacher2,teacher3,teacher4]
-    return render(request,'result.html',{"teachers":teachers})
+    if request.method == 'POST':
+        teachers = Teacher.objects.all()
+        teacher_name = request.POST.getlist('teacher_name')[0]
+        teacher_identity_filter = request.POST.getlist('identity')
+        teacher_department_filter = request.POST.getlist('department')
+        
+        if teacher_name:
+            teachers = teachers.filter(name__contains = teacher_name)
+        if teacher_identity_filter:
+            teachers = teachers.filter(identity__in = teacher_identity_filter)
+        if teacher_department_filter:
+            teachers = teachers.filter(department__in = teacher_department_filter)
+        
+        print(teacher_name)
+        print(teacher_identity_filter)
+        print(teacher_department_filter)
+        return render(request,'result.html',{"teachers":teachers,
+                                             "identities":identities,
+                                             "departments":departments})
+    else:
+        notfound = "请在搜索框中输入教师名字关键字,或在左侧下拉菜单中选择添加筛选条件查询"
+        return render(request,'result.html',{'notfound':notfound,
+                                             "identities":identities,
+                                             "departments":departments})
+
 
 def allResults(request):
     teachers = Teacher.objects.all()
-    return render(request,'result.html',{"teachers":teachers})
+    return render(request,'result.html',{"teachers":teachers,
+                                         "identities":identities,
+                                         "departments":departments})
 
 
 

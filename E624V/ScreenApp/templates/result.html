@@ -26,36 +26,52 @@
     }
   </style>
 
-  <div class="result-container">
-    <div class="result-box">
+  {% if notfound %}
+    <div class="result-container">
+      <div class="result-box">
         <ul class="list-group list-group-flush flex-fill">
-            <li class="list-group-item">
-                <div class="row">
-                    <label class="col font-weight-bold text-dark" style="font-size: 36px;">搜索到:{{teachers|length}}个结果</label>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                  {% for teacher in teachers %}
-                  <div class="col-md-4 mb-4">
-                    <div class="card">
-                      <div class="row no-gutters">
-                      <div class="col-md-6">
-                        <img src="{% static 'image/'|add:teacher.name|add:'.jpg' %}" class="card-img card-img-enlarge" alt="{teacher.name}">
-                      </div>
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h5 class="card-title">{{teacher.name}}</h5>
-                          <p class="card-text">{{teacher.identity}}<br>{{teacher.department}}</p>
+          <li class="list-group-item">
+            <div class="row">
+              <label class="col font-weight-bold text-dark" style="font-size: 36px;">{{notfound}}</label>
+            </div>
+          </li>
+          <li class="list-group-item"></li>
+        </ul>
+      </div>
+    </div>    
+  {% else %}
+    <div class="result-container">
+      <div class="result-box">
+          <ul class="list-group list-group-flush flex-fill">
+              <li class="list-group-item">
+                  <div class="row">
+                      <label class="col font-weight-bold text-dark" style="font-size: 36px;">搜索到:{{teachers|length}}个结果</label>
+                  </div>
+              </li>
+              <li class="list-group-item">
+                  <div class="row">
+                    {% for teacher in teachers %}
+                    <div class="col-md-4 mb-4">
+                      <div class="card">
+                        <div class="row no-gutters">
+                        <div class="col-md-6">
+                          <img src="{% static 'image/'|add:teacher.name|add:'.jpg' %}" class="card-img card-img-enlarge" alt="{teacher.name}">
+                        </div>
+                        <div class="col-md-6">
+                          <div class="card-body">
+                            <h5 class="card-title">{{teacher.name}}</h5>
+                            <p class="card-text">{{teacher.identity}}<br>{{teacher.department}}</p>
+                          </div>
+                        </div>
                         </div>
                       </div>
-                      </div>
                     </div>
+                    {% endfor %}
                   </div>
-                  {% endfor %}
-                </div>
-            </li>
-        </ul>
+              </li>
+          </ul>
+      </div>
     </div>
-  </div>
+  {% endif %}
+
 {% endblock %}
